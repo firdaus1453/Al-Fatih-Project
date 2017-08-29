@@ -17,6 +17,7 @@ public class gerak : MonoBehaviour {
 
 	Rigidbody2D lompat;
 
+	//deteksi tanah
 	public bool tanah;
 	public LayerMask targetlayer;
 	public Transform deteksitanah;
@@ -103,12 +104,12 @@ public class gerak : MonoBehaviour {
 			keluar.SetActive (true);
 		}
 
+		//deteksi tanah
 		if (tanah == true) {
 			anim.SetBool ("lompat", false);
 		} else {
 			anim.SetBool ("lompat", true);
 		}
-
 		tanah = Physics2D.OverlapCircle (deteksitanah.position, jangkauan, targetlayer);
 
 		//Gerak kiri dan kanan
