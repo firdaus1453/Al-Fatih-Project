@@ -19,7 +19,7 @@ public class enemy : MonoBehaviour {
 	private GameObject Enemy;
 	private GameObject Player;
 	private float Range;
-	public float Speed;
+	//public float Speed;
 
 	gerak KomponenGerak;
 	public int nyawaMusuh;
@@ -46,10 +46,10 @@ public class enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (nyawaMusuh <= 0) {
-			KomponenGerak.koin += 10;
+		/*if (nyawaMusuh <= 0) {
+			//KomponenGerak.koin += 10;
 			Destroy(gameObject);
-		}
+		}*/
 
 		//Musuh gerak
 		/*Range = Vector2.Distance(Enemy.transform.position, Player.transform.position);
@@ -97,13 +97,13 @@ public class enemy : MonoBehaviour {
 		//------------------End Enemy Move------------------------------------------------------------------
 	}
 
-	void OnTriggerEnter2D (Collider2D other){
+	/*void OnTriggerEnter2D (Collider2D other){
 		if (other.transform.tag == "Pedang") {
 			nyawaMusuh--;
-		} else if (other.transform.tag == "Player") {
+		} else if (other.transform.tag == "PedangMusuh") {
 			KomponenGerak.nyawa--;
 		}
-	}
+	}*/
 
 	public void MoveToPlayer ()
 	{

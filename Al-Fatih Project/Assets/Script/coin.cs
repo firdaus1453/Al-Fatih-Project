@@ -17,10 +17,10 @@ public class coin : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter2D (Collider2D other){
+	/*void OnTriggerEnter2D (Collider2D other){
 		if (other.transform.tag == "Player") {
 			KomponenGerak.nyawa++;
 			Destroy(gameObject);
 		}
-	}
+	}*/
 }

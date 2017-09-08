@@ -7,18 +7,25 @@ using UnityEngine.SceneManagement;
 
 public class gerak : MonoBehaviour {
 
-	Text infonyawa,infoscore,infonyawaM;
+	//Text infoscore,infonyawaM;
 	// Use this for initialization
+
+	//sound
+	AudioSource playerAS;
+	public AudioClip playerAttackSound;
 
 	public int kecepatan,kekuatanLompat;
 
 	public bool balik;
 	public int pindah;
 
-	Rigidbody2D lompat;
+	Rigidbody2D lompat,myRB;
+
+	//Jumping variable
 
 	//deteksi tanah
-	public bool tanah;
+	float groundCheckRadius = 0.2f;
+	public bool tanah = false;
 	public LayerMask targetlayer;
 	public Transform deteksitanah;
 	public float jangkauan;
@@ -26,8 +33,8 @@ public class gerak : MonoBehaviour {
 	Animator anim;
 	Animator anim2;
 
-	public int nyawa;
-	public int koin;
+	//public int nyawa;
+	//public int koin;
 
 	//Serang
 	SoalManager KomponenSoal;
@@ -53,7 +60,8 @@ public class gerak : MonoBehaviour {
 	public GameObject soalText;*/
 
 	void Start () {
-
+		//Sound
+		playerAS = GetComponent<AudioSource> ();
 		//Soal
 		/*if (unansweredQuestions == null || unansweredQuestions.Count == 0){
 			unansweredQuestions = questions.ToList<Question>();
@@ -66,8 +74,8 @@ public class gerak : MonoBehaviour {
 		//KomponenEnemy = GameObject.Find("MusuhKnight").GetComponent<enemy>();
 		gameui.SetActive (true);
 		//infonyawaM = GameObject.Find ("UInyawaM").GetComponent<Text> ();
-		infoscore = GameObject.Find ("UIscore").GetComponent<Text> ();
-		infonyawa = GameObject.Find ("UInyawa").GetComponent<Text> ();
+		/*infoscore = GameObject.Find ("UIscore").GetComponent<Text> ();
+		infonyawa = GameObject.Find ("UInyawa").GetComponent<Text> ();*/
 		lompat = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator>();
 		mulai = transform.position;
@@ -78,17 +86,17 @@ public class gerak : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//infonyawaM.text = "Nyawa Musuh : " + KomponenEnemy.nyawaMusuh.ToString();
+		/*//infonyawaM.text = "Nyawa Musuh : " + KomponenEnemy.nyawaMusuh.ToString();
 		infonyawa.text = "Nyawa : " + nyawa.ToString ();
-		infoscore.text = "Score : " + koin.ToString ();
+		infoscore.text = "Score : " + koin.ToString ();*/
 
-		if (ulang == true) {
+		/*if (ulang == true) {
 			//Instantiate (player);
 			transform.position = mulai;
 			ulang = false;
-		}
+		}*/
 
-		if (nyawa <= 0) {
+		/*if (nyawa <= 0) {
 			//Kalah info
 			kalah.SetActive (true);
 			restart.SetActive (true);
@@ -102,7 +110,7 @@ public class gerak : MonoBehaviour {
 			gameui.SetActive (false);
 			restart.SetActive (true);
 			keluar.SetActive (true);
-		}
+		}*/
 
 		//deteksi tanah
 		if (tanah == true) {
@@ -139,19 +147,26 @@ public class gerak : MonoBehaviour {
 		//}
 		if ((tombolSerang == true)) {
 			anim.SetBool ("serang", true);
+	playerAS.PlayOneShot (playerAttackSound);
 			//sa.SetActive (false);
 		} else if(tombolSerang == false) {
 			anim.SetBool ("serang", false);
 		}
-
-
-
-
+		
+		//Pindah badan
 		if (pindah > 0 && !balik) {
 			balikbadan ();
 		} else if (pindah < 0 && balik) {
 			balikbadan ();
 		}
+	}
+
+	void FixedUpdate(){
+		//check if we are grounded - if no, we are falling
+		tanah = Physics2D.OverlapCircle (deteksitanah.position, groundCheckRadius,targetlayer);
+		anim.SetBool ("isGrounded",tanah);
+
+		anim.SetFloat ("verticalSpeed",lompat.velocity.y);
 	}
 
 	void balikbadan(){
@@ -178,6 +193,8 @@ public class gerak : MonoBehaviour {
 	//Lompat
 	public void jump(){
 		if (tanah == true) {
+			tanah = false;
+			anim.SetBool ("isGrounded",tanah);
 			lompat.AddForce(new Vector2(0,kekuatanLompat));
 		}
 	}
