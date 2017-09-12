@@ -124,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023915826885834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.75, y: -2.841247, z: 0}
+  m_LocalPosition: {x: 70.3, y: -2.74, z: 0}
   m_LocalScale: {x: 0.40779048, y: 0.40779048, z: 0}
   m_Children:
   - {fileID: 4486961147874954}
@@ -263,9 +263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1818c56f2d800fd4283b00dee24d401b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   damageRate: 0.5
-  pushBackForce: 0
+  pushBackForce: 5
 --- !u!114 &114509970868922032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b913b7be7f33d4180911a1fd13e47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHealth: 20
+  enemyMaxHealth: 10
   enemyDeathFX: {fileID: 1967198094997242, guid: 336075bfa00a17245847a9b3001aba58,
     type: 2}
   enemySlider: {fileID: 114965223431721620}
@@ -349,7 +349,7 @@ MonoBehaviour:
   deteksiplayer:
     serializedVersion: 2
     m_Bits: 256
-  speed: 3
+  speed: 2
   Target: {fileID: 0}
   nyawaMusuh: 2
 --- !u!114 &114943296320371512
@@ -556,7 +556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.57}
+  m_AnchoredPosition: {x: 0, y: 1.5700002}
   m_SizeDelta: {x: 100, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224401132266959726
@@ -575,7 +575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.11, y: 0.17}
+  m_AnchoredPosition: {x: 0.11, y: 0.17000002}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224948648943233802

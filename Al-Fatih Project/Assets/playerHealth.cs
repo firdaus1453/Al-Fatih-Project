@@ -93,7 +93,7 @@ public class playerHealth : MonoBehaviour {
 
 	public void winGame(){
 		Destroy (gameObject);
-		theGameManager.restartTheGame();
+		theGameManager.winTheGame();
 		Animator winGameAnimator = winGameScreen.GetComponent<Animator> ();
 		winGameAnimator.SetTrigger ("gameOver");
 	}
