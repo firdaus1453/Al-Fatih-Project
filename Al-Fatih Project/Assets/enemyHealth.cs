@@ -13,6 +13,8 @@ public class enemyHealth : MonoBehaviour {
 	public bool drops;
 	public GameObject theDrop;
 
+	public int enemyScore;
+
 	//Sound death enemy
 	public AudioClip deathKnell;
 
@@ -34,13 +36,22 @@ public class enemyHealth : MonoBehaviour {
 		enemySlider.gameObject.SetActive (true);
 		currentHealth -= damage;
 		enemySlider.value = currentHealth;
-		if (currentHealth <= 0) {makeDead ();}
+		if (currentHealth <= 0) {
+			addScore ();
+			makeDead ();
+		}
 	}
 
 	void makeDead(){
+		
 		Destroy (gameObject);
 		AudioSource.PlayClipAtPoint (deathKnell, transform.position);
 		Instantiate (enemyDeathFX, transform.position, transform.rotation);
 		if(drops) Instantiate(theDrop, transform.position, transform.rotation);
+	}
+
+	void addScore(){
+		scoreController thePlayerScore = GameObject.Find("_GM").GetComponent<scoreController> ();
+		thePlayerScore.addScore(enemyScore);
 	}
 }

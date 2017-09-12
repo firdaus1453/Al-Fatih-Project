@@ -26,12 +26,16 @@ public class playerHealth : MonoBehaviour {
 	public Slider healthSlider;
 	public Text gameOverScreen;
 	public Text winGameScreen;
+	public GameObject winGameUI;
 
 	//Damage screen
 	public Image damageScreen;
 	bool damaged = false;
 	Color damagedColour = new Color(0f,0f,0f,0.5f);
 	float smoothColour = 5f;
+
+	//UI Win
+	public GameObject playerwinui;
 
 	// Use this for initialization
 	void Start () {
@@ -84,7 +88,7 @@ public class playerHealth : MonoBehaviour {
 		Instantiate (deathFX, transform.position, transform.rotation);
 		Destroy (gameObject);
 		AudioSource.PlayClipAtPoint (playerDeathSound, transform.position);
-		damageScreen.color = damagedColour;	
+		damageScreen.color = damagedColour;
 
 		Animator gameOverAnimator = gameOverScreen.GetComponent<Animator> ();
 		gameOverAnimator.SetTrigger ("gameOver");
@@ -93,8 +97,9 @@ public class playerHealth : MonoBehaviour {
 
 	public void winGame(){
 		Destroy (gameObject);
+		//playerwinui.SetActive (true);
 		theGameManager.winTheGame();
-		Animator winGameAnimator = winGameScreen.GetComponent<Animator> ();
+		Animator winGameAnimator = winGameUI.GetComponent<Animator> ();
 		winGameAnimator.SetTrigger ("gameOver");
 	}
 }

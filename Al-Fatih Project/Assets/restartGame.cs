@@ -6,7 +6,7 @@ public class restartGame : MonoBehaviour {
 
 	public float restartTime;
 	bool restartNow = false;
-	bool backMapNow = false;
+	bool btnRestart = false;
 	float resetTime;
 
 	// Use this for initialization
@@ -18,8 +18,8 @@ public class restartGame : MonoBehaviour {
 	void Update () {
 		if (restartNow && resetTime <= Time.time) {
 			Application.LoadLevel (Application.loadedLevel);
-		} else if (backMapNow && resetTime <= Time.time)  {
-			Application.LoadLevel (1);
+		}else if (restartNow && btnRestart) {
+			Application.LoadLevel (Application.loadedLevel);
 		}
 	}
 
@@ -28,8 +28,13 @@ public class restartGame : MonoBehaviour {
 		resetTime = Time.time + restartTime;
 	}
 
+	public void btnrestartTheGame(){
+		btnRestart = true;
+		restartNow = true;
+	}
+
 	public void winTheGame(){
-		backMapNow = true;
-		resetTime = Time.time + restartTime;
+		//backMapNow = true;
+		//resetTime = Time.time + restartTime;
 	}
 }

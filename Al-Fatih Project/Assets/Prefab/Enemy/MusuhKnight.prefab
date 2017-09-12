@@ -124,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023915826885834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 70.3, y: -2.74, z: 0}
+  m_LocalPosition: {x: 28.19, y: -2.841247, z: 0}
   m_LocalScale: {x: 0.40779048, y: 0.40779048, z: 0}
   m_Children:
   - {fileID: 4486961147874954}
@@ -331,6 +331,7 @@ MonoBehaviour:
   enemySlider: {fileID: 114965223431721620}
   drops: 1
   theDrop: {fileID: 1488544775794726, guid: fcde2db551cb6914082cce3aa46bc13c, type: 2}
+  enemyScore: 10
   deathKnell: {fileID: 8300000, guid: cb47f485aa074c94587d71d8b9c9896e, type: 3}
 --- !u!114 &114856708787172318
 MonoBehaviour:
