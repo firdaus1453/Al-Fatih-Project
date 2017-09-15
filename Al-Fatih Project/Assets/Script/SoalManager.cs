@@ -6,10 +6,13 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 
 public class SoalManager : MonoBehaviour {
-	//Animasi
-	public Animator anim2;
+	//Mengambil komponen class/script gerak
+	public GameObject pl;
+	gerak sr;
+	swordHit jr;
 
-	//Serang
+	//Animasi
+	public Animator anim2,anim3;
 
 	//Soal
 	public Question[] questions;
@@ -36,9 +39,17 @@ public class SoalManager : MonoBehaviour {
 	//Penunjuk benar salah
 	public GameObject benar;
 
+	//Variabel Jurus
+	public int correctCount;
+	bool jurusON = false;
+	public GameObject btnJurus;
+	public float delayUsingJurus;
 
 	// Use this for initialization
 	void Start () {
+		jr = GameObject.Find("Player").GetComponentInChildren<swordHit> ();
+		//Memasukkan class gerak ke dalam pl dan mencari nama object yang ingin diambil
+
 		//Soal
 		//if (unansweredQuestions == null || unansweredQuestions.Count == 0){
 		//tempQ = GameObject.FindGameObjectsWithTag("Soal");
@@ -47,13 +58,14 @@ public class SoalManager : MonoBehaviour {
 		//}
 		SetCurrentQuestion();
 		Debug.Log (currentQuestion.soal + " adalah " + currentQuestion.jawaban);
-		//anim = GetComponent<Animator>();
+
+		//Animator
+		//anim3 = GameObject.FindWithTag("Player").GetComponent<Animator>();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	//Soal
@@ -104,6 +116,11 @@ public class SoalManager : MonoBehaviour {
 		//Destroy(t[qN]);
 		qN += 1;
 		if (qN == tempQ.Length) {
+			if (correctCount == tempQ.Length) {
+				jurusON = true;
+				btnJurus.SetActive (true);
+				Debug.Log ("Jurus on? = " + jurusON);
+			} 
 			Invoke ("hapusSoal", 0.1f);
 			//hapusSoal();
 			qN = 0;
@@ -112,10 +129,31 @@ public class SoalManager : MonoBehaviour {
 	}
 
 	public void hapusSoal(){
+		correctCount = 0;
 		panah.SetActive (true);
 		GameObject[] soalt = GameObject.FindGameObjectsWithTag("Soal");
 		foreach(GameObject soalg in soalt)
 		Destroy(soalg);
 		SetCurrentQuestion ();
 	}
+
+	public void clickedJurus(){
+		Debug.Log ("Menjalankan jurus, BOOOM!!");
+		//anim3.SetTrigger ("serang");
+		sr = GameObject.Find("Player").GetComponent<gerak> ();
+		sr.tombolJurus= true;
+		jr.weaponDamage = 30;
+
+		Invoke("unClickedJurus",delayUsingJurus);
+		jurusON = false;
+		btnJurus.SetActive (false);
+		Debug.Log ("Jurus mati? = " + jurusON);
+	}
+
+	public void unClickedJurus(){
+		sr = GameObject.Find("Player").GetComponent<gerak> ();
+		sr.tombolJurus= false;
+		jr.weaponDamage = 10;
+	}
+
 }

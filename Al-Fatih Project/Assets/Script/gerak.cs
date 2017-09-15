@@ -9,7 +9,6 @@ public class gerak : MonoBehaviour {
 
 	//Text infoscore,infonyawaM;
 	// Use this for initialization
-
 	//sound
 	AudioSource playerAS;
 	public AudioClip playerAttackSound;
@@ -22,6 +21,8 @@ public class gerak : MonoBehaviour {
 	Rigidbody2D lompat,myRB;
 
 	//Jumping variable
+	bool canDoubleJump;
+	public float delayBeforeDoubleJump;
 
 	//deteksi tanah
 	float groundCheckRadius = 0.2f;
@@ -42,7 +43,7 @@ public class gerak : MonoBehaviour {
 	enemy KomponenEnemy;
 	Vector2 mulai;
 	public bool ulang;
-	public bool tombolKiri,tombolKanan,tombolSerang;
+	public bool tombolKiri,tombolKanan,tombolSerang,tombolJurus;
 
 	//UI Menang Kalah
 	public GameObject menang, kalah, restart, keluar;
@@ -114,11 +115,12 @@ public class gerak : MonoBehaviour {
 
 		//deteksi tanah
 		if (tanah == true) {
-			anim.SetBool ("lompat", false);
+			//anim.SetBool ("lompat", false);
+			//canDoubleJump = false;
 		} else {
-			anim.SetBool ("lompat", true);
+			//anim.SetBool ("lompat", true);
 		}
-		tanah = Physics2D.OverlapCircle (deteksitanah.position, jangkauan, targetlayer);
+		//tanah = Physics2D.OverlapCircle (deteksitanah.position, jangkauan, targetlayer);
 
 		//Gerak kiri dan kanan
 		if (Input.GetKey (KeyCode.D) || (tombolKanan==true)) {
@@ -147,10 +149,17 @@ public class gerak : MonoBehaviour {
 		//}
 		if ((tombolSerang == true)) {
 			anim.SetBool ("serang", true);
-	playerAS.PlayOneShot (playerAttackSound);
+			playerAS.PlayOneShot (playerAttackSound);
 			//sa.SetActive (false);
 		} else if(tombolSerang == false) {
 			anim.SetBool ("serang", false);
+		}
+
+		//Menggunakan jurus
+		if(tombolJurus == true){
+			anim.SetTrigger ("jurus");
+		}else if(tombolJurus == false){
+			anim.SetBool("jurus", false);
 		}
 		
 		//Pindah badan
@@ -163,8 +172,8 @@ public class gerak : MonoBehaviour {
 
 	void FixedUpdate(){
 		//check if we are grounded - if no, we are falling
-		tanah = Physics2D.OverlapCircle (deteksitanah.position, groundCheckRadius,targetlayer);
-		anim.SetBool ("isGrounded",tanah);
+		//tanah = Physics2D.OverlapCircle (deteksitanah.position, groundCheckRadius,targetlayer);
+		//anim.SetBool ("isGrounded",tanah);
 
 		anim.SetFloat ("verticalSpeed",lompat.velocity.y);
 	}
@@ -192,10 +201,34 @@ public class gerak : MonoBehaviour {
 
 	//Lompat
 	public void jump(){
+		// single jump
 		if (tanah == true) {
 			tanah = false;
-			anim.SetBool ("isGrounded",tanah);
-			lompat.AddForce(new Vector2(0,kekuatanLompat));
+			//anim.SetBool ("isGrounded",tanah);
+			lompat.AddForce(new Vector2(lompat.velocity.x,kekuatanLompat));
+			anim.SetBool ("lompat", true);	
+			Invoke ("EnableDoubleJump", delayBeforeDoubleJump);
+		}
+		//Double jump
+		if (canDoubleJump) {
+			canDoubleJump = false;
+			lompat.AddForce(new Vector2(lompat.velocity.x,kekuatanLompat));
+			anim.SetBool ("lompat", true);
+			//anim.SetBool ("isGrounded",tanah);
+		}
+	}
+	
+	void EnableDoubleJump(){
+		canDoubleJump = true;
+	}
+
+	//Lompat perbaikan cek tanah
+	void OnCollisionEnter2D(Collision2D other){
+		if (other.gameObject.tag == "Ground") {
+			tanah = true;
+			canDoubleJump = false;
+		Debug.Log ("Terdeteksi tanah dan "+ canDoubleJump);
+		anim.SetBool ("lompat", false);
 		}
 	}
 
@@ -220,10 +253,13 @@ public class gerak : MonoBehaviour {
 			Debug.Log ("CORRECT!");
 			anim2.SetBool("benar",true);
 			//StartCoroutine(KomponenSoal.TransitionToNextQuestion());
+			KomponenSoal.correctCount += 1;
+			Debug.Log ("Jawaban yg benar = " + KomponenSoal.correctCount);
 			KomponenSoal.TransitionToNextQuestion();
 
 		} else {
 			Debug.Log ("WRONG!");
+			//KomponenSoal.correctCount = 0;
 			anim2.SetBool("salah",true);
 			KomponenSoal.TransitionToNextQuestion();
 		}Debug.Log (KomponenSoal.currentQuestion.jawaban + "dan " + aa);

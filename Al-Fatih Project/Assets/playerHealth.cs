@@ -19,13 +19,13 @@ public class playerHealth : MonoBehaviour {
 	//sound player death
 	public AudioClip playerDeathSound;
 
-	//
+	//Variabel Audio
 	AudioSource playerAS;
 
 	//HUD Variables
 	public Slider healthSlider;
-	public Text gameOverScreen;
-	public Text winGameScreen;
+	//public Text gameOverScreen;
+	//public Text winGameScreen;
 	public GameObject winGameUI;
 
 	//Damage screen
@@ -34,8 +34,12 @@ public class playerHealth : MonoBehaviour {
 	Color damagedColour = new Color(0f,0f,0f,0.5f);
 	float smoothColour = 5f;
 
-	//UI Win
-	public GameObject playerwinui;
+	//UI Death
+	public GameObject playerDeathUI;
+	//Score Death
+	public Text txtScoreDeath;
+	//Unactive puase button
+	public GameObject pauseBtn;
 
 	// Use this for initialization
 	void Start () {
@@ -89,17 +93,29 @@ public class playerHealth : MonoBehaviour {
 		Destroy (gameObject);
 		AudioSource.PlayClipAtPoint (playerDeathSound, transform.position);
 		damageScreen.color = damagedColour;
-
-		Animator gameOverAnimator = gameOverScreen.GetComponent<Animator> ();
+		pauseBtn.SetActive(false);
+		scoreController thePlayerScore = GameObject.Find("_GM").GetComponent<scoreController> ();
+		txtScoreDeath.text = thePlayerScore.Score.ToString();
+		Animator gameOverAnimator = playerDeathUI.GetComponent<Animator> ();
 		gameOverAnimator.SetTrigger ("gameOver");
-		theGameManager.restartTheGame ();
+		//theGameManager.restartTheGame ();
 	}
 
 	public void winGame(){
+		pauseBtn.SetActive(false);
 		Destroy (gameObject);
 		//playerwinui.SetActive (true);
-		theGameManager.winTheGame();
+		//theGameManager.winTheGame();
+		//scoreController thePlayerScore = GameObject.Find("_GM").GetComponent<scoreController> ();
 		Animator winGameAnimator = winGameUI.GetComponent<Animator> ();
 		winGameAnimator.SetTrigger ("gameOver");
+		/*if (thePlayerScore.Score >= 80) {
+			winGameAnimator.SetInteger ("winStar", 3);
+			}else if (thePlayerScore.Score < 80 && thePlayerScore.Score > 30 ) {
+					winGameAnimator.SetInteger ("winStar",2);
+				}else if (thePlayerScore.Score <= 30) {
+					winGameAnimator.SetInteger ("winStar",1);
+					}*/
 	}
 }
+

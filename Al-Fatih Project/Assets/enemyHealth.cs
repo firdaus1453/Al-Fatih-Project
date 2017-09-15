@@ -21,6 +21,10 @@ public class enemyHealth : MonoBehaviour {
 	float currentHealth;
 	//int enemyDead; 
 
+	//memanggil class restartGame
+	//restartGame getRestartGame;
+
+
 	// Use this for initialization
 	void Start () {
 		currentHealth = enemyMaxHealth;
@@ -33,7 +37,7 @@ public class enemyHealth : MonoBehaviour {
 	}
 
 	public void addDamage(float damage){
-		enemySlider.gameObject.SetActive (true);
+		//enemySlider.gameObject.SetActive (true);
 		currentHealth -= damage;
 		enemySlider.value = currentHealth;
 		if (currentHealth <= 0) {
@@ -43,11 +47,14 @@ public class enemyHealth : MonoBehaviour {
 	}
 
 	void makeDead(){
-		
-		Destroy (gameObject);
+		//audioGM.GetComponent<AudioSource> ().Pause();
+		//restartGame getRestartGame = GameObject.Find("theGameManager").GetComponent<restartGame> ();	//Memanggil class restartgame
+		//getRestartGame.cekBossDeath ();		//menjalankan fungsi cekBossDeath yang ada di script restartGame
+
 		AudioSource.PlayClipAtPoint (deathKnell, transform.position);
 		Instantiate (enemyDeathFX, transform.position, transform.rotation);
 		if(drops) Instantiate(theDrop, transform.position, transform.rotation);
+		Destroy (gameObject);
 	}
 
 	void addScore(){
