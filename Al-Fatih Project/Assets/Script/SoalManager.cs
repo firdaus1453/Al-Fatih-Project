@@ -34,7 +34,7 @@ public class SoalManager : MonoBehaviour {
 	float pa;
 
 	//Panah penunjuk soal
-	public GameObject panah;
+	public GameObject[] panah;
 
 	//Penunjuk benar salah
 	public GameObject benar;
@@ -53,11 +53,10 @@ public class SoalManager : MonoBehaviour {
 		//Soal
 		//if (unansweredQuestions == null || unansweredQuestions.Count == 0){
 		//tempQ = GameObject.FindGameObjectsWithTag("Soal");
-		panah.SetActive (true);
 		unansweredQuestions = questions.ToList<Question>();
 		//}
 		SetCurrentQuestion();
-		Debug.Log (currentQuestion.soal + " adalah " + currentQuestion.jawaban);
+		//Debug.Log (currentQuestion.soal + " adalah " + currentQuestion.jawaban);
 
 		//Animator
 		//anim3 = GameObject.FindWithTag("Player").GetComponent<Animator>();
@@ -76,7 +75,7 @@ public class SoalManager : MonoBehaviour {
 		//currentQuestion2 = unansweredQuestions [randomQuestionIndex2];
 
 
-
+		panah[qN].SetActive (true);
 		//soalText.gameObject = currentQuestion.soal;
 		for(int i = 0;i < unansweredQuestions.Count;i++){
 			//unansweredQuestions = questions.ToList<Question>();
@@ -87,7 +86,8 @@ public class SoalManager : MonoBehaviour {
 			pa = soalText.transform.position.y;
 			t[i] = Instantiate(currentQuestion.soal,new Vector3 (po,pa,0), soalText.transform.rotation) as GameObject; //-1.5f*2+i+i*0.4f,3.40f,0
 			t[i].transform.parent=transform;
-
+			/*Vector3 posisiSoal = t[i].transform.position;
+			Debug.Log (posisiSoal);*/
 			anim2 = t[i].gameObject.GetComponent<Animator>();
 		}
 		//t = Instantiate(currentQuestion.soal, soalText.transform.position, soalText.transform.rotation);
@@ -115,7 +115,9 @@ public class SoalManager : MonoBehaviour {
 		//SetCurrentQuestion ();
 		//Destroy(t[qN]);
 		qN += 1;
+
 		if (qN == tempQ.Length) {
+			
 			if (correctCount == tempQ.Length) {
 				jurusON = true;
 				btnJurus.SetActive (true);
@@ -124,13 +126,15 @@ public class SoalManager : MonoBehaviour {
 			Invoke ("hapusSoal", 0.1f);
 			//hapusSoal();
 			qN = 0;
+			//panah[qN].SetActive (true);
 		}
-		Debug.Log (currentQuestion.soal + " adalah " + currentQuestion.jawaban);
+		panah[qN].SetActive (true);
+		//Debug.Log (currentQuestion.soal + " adalah " + currentQuestion.jawaban);
 	}
 
 	public void hapusSoal(){
 		correctCount = 0;
-		panah.SetActive (true);
+
 		GameObject[] soalt = GameObject.FindGameObjectsWithTag("Soal");
 		foreach(GameObject soalg in soalt)
 		Destroy(soalg);

@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - PedangMusuh
   - Ground
+  - Spawn
   layers:
   - Default
   - TransparentFX

@@ -37,7 +37,7 @@ public class enemyHealth : MonoBehaviour {
 	}
 
 	public void addDamage(float damage){
-		//enemySlider.gameObject.SetActive (true);
+		enemySlider.gameObject.SetActive (true);
 		currentHealth -= damage;
 		enemySlider.value = currentHealth;
 		if (currentHealth <= 0) {

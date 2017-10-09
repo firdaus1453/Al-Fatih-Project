@@ -24,6 +24,9 @@ public class enemy : MonoBehaviour {
 	gerak KomponenGerak;
 	public int nyawaMusuh;
 
+	//mengambil dari sowrdHit
+	swordHit theSwordHit;
+
 	// Use this for initialization
 	void Start () {
 		//Animasi
@@ -42,10 +45,25 @@ public class enemy : MonoBehaviour {
 		myWidth = mySprite.bounds.extents.x;
 		myHeight = mySprite.bounds.extents.y;
 		//------------------End Enemy Move------------------------------------------------------------------
+		theSwordHit = GameObject.Find("pedang").GetComponentInChildren<swordHit>();
+	
 	}
 	
 	// Update is called once per frame
+	void Update(){
+		if (theSwordHit.terkenaAttack == true) {
+			anim.SetBool ("terkenaSerangan", true);
+			Invoke ("stopTerkenaSer", 0.5f);
+		}
+	}
+
+	void stopTerkenaSer(){
+		theSwordHit.terkenaAttack = false;
+		anim.SetBool("terkenaSerangan", false);
+	}
+
 	void FixedUpdate () {
+		
 		/*if (nyawaMusuh <= 0) {
 			//KomponenGerak.koin += 10;
 			Destroy(gameObject);
@@ -87,9 +105,11 @@ public class enemy : MonoBehaviour {
 			Debug.Log ("Tersentuh player");
 			Rest();
 			anim.SetBool ("serang", true);
+			anim.SetBool ("bossAttack", true);
 			
 		} else if(!isPlayer) {
 			anim.SetBool ("serang", false);
+			anim.SetBool ("bossAttack", false);
 			MoveToPlayer();
 		}
 
@@ -110,6 +130,7 @@ public class enemy : MonoBehaviour {
 		Vector2 myVel = myBody.velocity;
 		myVel.x = -myTrans.right.x * speed;
 		myBody.velocity = myVel;
+		anim.SetBool ("terkenaSerangan", false);
 	}
 
 	public void Rest ()

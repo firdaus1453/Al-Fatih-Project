@@ -147,13 +147,16 @@ public class gerak : MonoBehaviour {
 				}
 			}*/
 		//}
-		if ((tombolSerang == true)) {
+		/*if ((tombolSerang == true)) {
 			anim.SetBool ("serang", true);
+			//swordHit playAttackSound = GameObject.Find("pedang").GetComponent<swordHit> ();
+			//playAttackSound.playAttackAudio ();
 			playerAS.PlayOneShot (playerAttackSound);
+			Invoke ("lepasSerang", 0); 
 			//sa.SetActive (false);
 		} else if(tombolSerang == false) {
-			anim.SetBool ("serang", false);
-		}
+			
+		}*/
 
 		//Menggunakan jurus
 		if(tombolJurus == true){
@@ -175,7 +178,7 @@ public class gerak : MonoBehaviour {
 		//tanah = Physics2D.OverlapCircle (deteksitanah.position, groundCheckRadius,targetlayer);
 		//anim.SetBool ("isGrounded",tanah);
 
-		anim.SetFloat ("verticalSpeed",lompat.velocity.y);
+		//anim.SetFloat ("verticalSpeed",lompat.velocity.y);
 	}
 
 	void balikbadan(){
@@ -205,10 +208,10 @@ public class gerak : MonoBehaviour {
 		if (tanah == true) {
 			tanah = false;
 			//anim.SetBool ("isGrounded",tanah);
-			lompat.AddForce(new Vector2(lompat.velocity.x,kekuatanLompat));
+			lompat.AddForce (new Vector2 (lompat.velocity.x, kekuatanLompat));
 			anim.SetBool ("lompat", true);	
 			Invoke ("EnableDoubleJump", delayBeforeDoubleJump);
-		}
+		} 
 		//Double jump
 		if (canDoubleJump) {
 			canDoubleJump = false;
@@ -230,6 +233,9 @@ public class gerak : MonoBehaviour {
 		Debug.Log ("Terdeteksi tanah dan "+ canDoubleJump);
 		anim.SetBool ("lompat", false);
 		}
+		/*if (other.gameObject.tag == "Enemy"){
+			detectEnemy = true;
+		}*/
 	}
 
 	//Serang
@@ -241,29 +247,41 @@ public class gerak : MonoBehaviour {
 	}
 
 	public void oa(GameObject aa){
-		KomponenSoal.panah.SetActive (false);
-		Debug.Log (KomponenSoal.currentQuestion.jawaban + "dan " + aa);
+	//Vector2 posisiSoal = KomponenSoal.tempQ[KomponenSoal.qN].transform.position;
+	//Debug.Log (posisiSoal);
+		KomponenSoal.panah[KomponenSoal.qN].SetActive (false); //KomponenSoal.panah.transform.position = new Vector3(KomponenSoal.tempQ[KomponenSoal.qN]);
+		
 		//GameObject ht = KomponenSoal.tempQ;
 
 		//Animasi benar salah
 		anim2 = KomponenSoal.t[KomponenSoal.qN].gameObject.GetComponent<Animator>();
 
 		if (KomponenSoal.tempQ[KomponenSoal.qN] == aa) {
-			tombolSerang = true;
+			//tombolSerang = true;
+			Debug.Log ("Jawabannya adalah = "+KomponenSoal.tempQ[KomponenSoal.qN] + " dan player memilih = " + aa);
+			//Animasi serang dijalankan
+			anim.SetBool ("serang", true);
+			playerAS.PlayOneShot (playerAttackSound);
+			Invoke ("lepasSerang", 0.1f); 
+			
 			Debug.Log ("CORRECT!");
 			anim2.SetBool("benar",true);
 			//StartCoroutine(KomponenSoal.TransitionToNextQuestion());
 			KomponenSoal.correctCount += 1;
 			Debug.Log ("Jawaban yg benar = " + KomponenSoal.correctCount);
 			KomponenSoal.TransitionToNextQuestion();
-
 		} else {
 			Debug.Log ("WRONG!");
 			//KomponenSoal.correctCount = 0;
 			anim2.SetBool("salah",true);
 			KomponenSoal.TransitionToNextQuestion();
-		}Debug.Log (KomponenSoal.currentQuestion.jawaban + "dan " + aa);
+			Debug.Log ("Jawabannya adalah = "+KomponenSoal.tempQ[KomponenSoal.qN] + " dan player memilih = " + aa);
+		}
 
+	}
+	
+	void lepasSerang(){
+		anim.SetBool ("serang", false);
 	}
 
 

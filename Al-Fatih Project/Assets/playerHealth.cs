@@ -12,7 +12,7 @@ public class playerHealth : MonoBehaviour {
 	//restart game
 	public restartGame theGameManager;
 
-	float currentHealth;
+	public float currentHealth;
 
 	playerController controlMovement;
 
@@ -104,11 +104,19 @@ public class playerHealth : MonoBehaviour {
 	public void winGame(){
 		pauseBtn.SetActive(false);
 		Destroy (gameObject);
-		//playerwinui.SetActive (true);
+
 		//theGameManager.winTheGame();
 		//scoreController thePlayerScore = GameObject.Find("_GM").GetComponent<scoreController> ();
 		Animator winGameAnimator = winGameUI.GetComponent<Animator> ();
 		winGameAnimator.SetTrigger ("gameOver");
+		//GameObject allEnemy = GameObject.FindWithTag ("Enemy");
+		//allEnemy.SetActive (false);
+
+		GameObject[] enemies =  GameObject.FindGameObjectsWithTag("Enemy");
+		foreach(GameObject enemy in enemies){
+			enemy.SetActive (false);
+		}
+
 		/*if (thePlayerScore.Score >= 80) {
 			winGameAnimator.SetInteger ("winStar", 3);
 			}else if (thePlayerScore.Score < 80 && thePlayerScore.Score > 30 ) {

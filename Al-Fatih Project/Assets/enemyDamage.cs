@@ -32,7 +32,7 @@ public class enemyDamage : MonoBehaviour {
 	}
 
 	void pushBack(Transform pushedObject){
-		Vector2 pushDirection = new Vector2 (0, (pushedObject.position.y - transform.position.y)).normalized;
+		Vector2 pushDirection = new Vector2 ((pushedObject.position.x - transform.position.x),0 ).normalized;
 		pushDirection *= pushBackForce;
 		Rigidbody2D pushRB = pushedObject.gameObject.GetComponent<Rigidbody2D> ();
 		pushRB.velocity = Vector2.zero;

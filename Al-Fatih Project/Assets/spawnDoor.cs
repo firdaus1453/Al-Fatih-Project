@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class spawnDoor : MonoBehaviour {
 
-	bool activated = false;
-	public Transform whereToSpawn;
-	public GameObject door;
+	public bool stage4 = false;
+	//public Transform whereToSpawn;
+	//public GameObject door;
 
 	/*
 	//Get komponen scoreController
@@ -27,9 +27,9 @@ public class spawnDoor : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "Player" && !activated && GameObject.Find("benteng") == null) {
-			activated = true;
-			Instantiate (door, whereToSpawn.position, Quaternion.identity);
+		if (other.tag == "Player" && GameObject.FindWithTag("Enemy") == null) {
+			stage4 = true;
+			//Instantiate (door, whereToSpawn.position, Quaternion.identity);
 			Destroy (gameObject);
 
 			/*thePlayerScore.winStage1 = 1;
