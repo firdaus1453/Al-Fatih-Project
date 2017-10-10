@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2871b3bd4e57af2499c9c7e6aec58be0
+timeCreated: 1507593870
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Forte
+  fontNames:
+  - Forte
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
