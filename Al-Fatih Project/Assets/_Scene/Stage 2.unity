@@ -13277,9 +13277,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1676139146}
-  - component: {fileID: 1676139143}
   - component: {fileID: 1676139142}
   - component: {fileID: 1676139147}
+  - component: {fileID: 1676139143}
   m_Layer: 11
   m_Name: waterPushBack
   m_TagString: Untagged
@@ -13315,18 +13315,16 @@ BoxCollider2D:
 --- !u!114 &1676139143
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114416012150189916, guid: 6881df2d7d118db4d912a54c528cbb8b,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1676139141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1818c56f2d800fd4283b00dee24d401b, type: 3}
+  m_Script: {fileID: 11500000, guid: b4bb7301529ee15479392c69593dce32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
-  damageRate: 0.5
   pushBackForce: 10
+  damage: 10
 --- !u!4 &1676139146
 Transform:
   m_ObjectHideFlags: 0

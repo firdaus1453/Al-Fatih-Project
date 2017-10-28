@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 372250420}
   - component: {fileID: 372250425}
   - component: {fileID: 372250424}
+  - component: {fileID: 372250426}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -450,6 +451,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &372250426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 372250419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2b36489653b6c4f8627ea4d1ea7cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sdhpernahmain: 0
 --- !u!1 &457871743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,9 +1015,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 372250424}
+      - m_Target: {fileID: 372250426}
         m_MethodName: ketujuan
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scene/menu info pembuat.unity
     guid: 6fefabf7e70dd5b4997a2d65715b361b
+  - enabled: 1
+    path: Assets/_Scene/story.unity
+    guid: 00000000000000000000000000000000

@@ -58,7 +58,6 @@ public class scoreController : MonoBehaviour {
 				Debug.Log ("Jmlah star stage 1 = " +starStage1);
 				Debug.Log ("win stage 1 = " +winStage1);
 
-
 				starStage2 = PlayerPrefs.GetInt ("starStage2");
 				winStage2 = PlayerPrefs.GetInt ("winStage2");
 				Debug.Log ("Jmlah star stage 2 = " +starStage2);

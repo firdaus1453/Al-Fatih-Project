@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4594221019742682}
   - component: {fileID: 212596855391071248}
   - component: {fileID: 60137928026895834}
-  - component: {fileID: 114416012150189916}
+  - component: {fileID: 114902465254842666}
   m_Layer: 11
   m_Name: Spike
   m_TagString: Untagged
@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753569406645248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.55, y: -4.93, z: 0}
+  m_LocalPosition: {x: 66.49, y: -4.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4020427515688482}
@@ -229,7 +229,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.3, y: 0.62302494}
   m_EdgeRadius: 0
---- !u!114 &114416012150189916
+--- !u!114 &114902465254842666
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -237,12 +237,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1753569406645248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1818c56f2d800fd4283b00dee24d401b, type: 3}
+  m_Script: {fileID: 11500000, guid: b4bb7301529ee15479392c69593dce32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  damageRate: 0.5
-  pushBackForce: 12
+  pushBackForce: 8
+  damage: 5
 --- !u!212 &212596855391071248
 SpriteRenderer:
   m_ObjectHideFlags: 1
